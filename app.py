@@ -377,13 +377,15 @@ st.markdown("""
         font-weight: 700;
         border: none !important;
         border-radius: 12px;
-        padding: 12px 25px;
+        padding: 8px 16px;
+        font-size: 0.9rem;
         width: 100%;
         font-family: 'Orbitron', sans-serif;
         text-transform: uppercase;
-        letter-spacing: 1.5px;
-        box-shadow: 0 4px 15px rgba(0, 119, 255, 0.4);
+        letter-spacing: 1.2px;
+        box-shadow: 0 4px 15px rgba(0, 119, 255, 0.3);
         transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        min-height: 45px;
     }
     
     .stButton>button:hover, .stDownloadButton>button:hover {
@@ -746,7 +748,7 @@ def reset_t2():
 with t1:
     # 🎯 TARGET ACQUISITION (TOP FIXED)
     with st.container(border=True):
-        sel_c1, sel_c2, sel_c3 = st.columns([1.5, 1.5, 0.8])
+        sel_c1, sel_c2, sel_c3 = st.columns([1.5, 1.5, 1.0])
         
         with sel_c1:
             st.markdown("<label>Select Tournament</label>", unsafe_allow_html=True)
@@ -807,13 +809,13 @@ with t1:
 with t2:
     with st.container(border=True):
         st.markdown("<h4 style='color:#00d4ff; font-family:Orbitron; margin-bottom:10px;'>🌍 Global Team Search</h4>", unsafe_allow_html=True)
-        gcol1, gcol2 = st.columns([2, 1])
+        gcol1, gcol2 = st.columns([2, 1.2])
         with gcol1:
             univ = st.session_state.get('guniv', [])
             st.markdown("<label>Search Global Teams</label>", unsafe_allow_html=True)
             sel_gu = st.selectbox("Search Global Teams", [t['display'] for t in univ], index=None, placeholder="Type a team name...", key="global_target", on_change=on_global_change, label_visibility="collapsed")
         with gcol2:
-            st.markdown("<div style='height:30px;'></div>", unsafe_allow_html=True)
+            st.markdown("<div style='height:28px;'></div>", unsafe_allow_html=True)
             g_execute = st.button("🚀 Start Global Analysis", use_container_width=True, key="btn_global")
 
     g_main = st.empty()
@@ -844,13 +846,15 @@ with t3:
     st.markdown("<div class='section-title'>⚔️ Team Comparison Analysis</div>", unsafe_allow_html=True)
     st.markdown("<p style='margin-top: -20px; color: #888; font-size: 0.9rem;'>Select two teams to compare their stats side-by-side and see an AI-generated battle verdict.</p>", unsafe_allow_html=True)
     with st.container(border=True):
-        c_cols = st.columns([1, 1, 0.8])
+        c_cols = st.columns([1, 1, 1])
         with c_cols[0]:
-            sa = st.selectbox("TEAM ALPHA", [t['display'] for t in st.session_state.get('ca', [])], key="sa", placeholder="Select first team...", index=None, on_change=on_comp_change)
+            st.markdown("<label>TEAM ALPHA</label>", unsafe_allow_html=True)
+            sa = st.selectbox("TEAM ALPHA", [t['display'] for t in st.session_state.get('ca', [])], key="sa", placeholder="Select first team...", index=None, on_change=on_comp_change, label_visibility="collapsed")
         with c_cols[1]:
-            sb = st.selectbox("TEAM BETA", [t['display'] for t in st.session_state.get('cb', [])], key="sb", placeholder="Select second team...", index=None, on_change=on_comp_change)
+            st.markdown("<label>TEAM BETA</label>", unsafe_allow_html=True)
+            sb = st.selectbox("TEAM BETA", [t['display'] for t in st.session_state.get('cb', [])], key="sb", placeholder="Select second team...", index=None, on_change=on_comp_change, label_visibility="collapsed")
         with c_cols[2]:
-            st.markdown("<br>", unsafe_allow_html=True)
+            st.markdown("<div style='height:28px;'></div>", unsafe_allow_html=True)
             c_execute = st.button("⚔️ Start Comparison", use_container_width=True, key="btn_matchup")
 
     c_main = st.empty()

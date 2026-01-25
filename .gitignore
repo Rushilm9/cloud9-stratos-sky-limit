@@ -2,4 +2,5 @@ backup
 venv
 try1
 .env
-readme2.md 
+readme2.md
+__pycache__
